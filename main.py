@@ -26,8 +26,7 @@ def move(L):
     for path in L:
         source = path
         name = os.path.basename(os.path.normpath(path))
-        destination = r'~/Library/Mobile\ Documents/com~apple~CloudDocs/Documents/School_files/Spring_2020/UROP/Data_Extractor/resources/'+name
-        destination = os.path.join(destination)
+        destination = '/Volumes/storage/Annotation_Files/' + name
         shutil.copyfile(source, destination)
 
 if __name__ == "__main__":
