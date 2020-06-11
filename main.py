@@ -26,9 +26,9 @@ def move(L):
     for path in L:
         source = path
         name = os.path.basename(os.path.normpath(path))
-        destination = '/Volumes/storage/Annotation_Files/' + name
+        destination = r'C:\Users\Blender\iCloudDrive\Documents\School_Files\Spring_2020\UROP\Resources\Agreeability\Extracted' + name # edit this to move
         shutil.copyfile(source, destination)
 
 if __name__ == "__main__":
-    paths = (find('*.txt', '/Volumes/My Passport/study_1'))
-    move(paths)
+    paths = (find('*.txt', r'C:\Users\Blender\iCloudDrive\Documents\School_Files\Spring_2020\UROP\Resources\Agreeability\Extracted\ExtractedIrene'))
+    print(paths)
