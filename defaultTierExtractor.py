@@ -1,9 +1,7 @@
 from main import find
 import csv
+import pandas as pd
 
-
-Emily = find('*.txt',r'C:\Users\Blender\iCloudDrive\Documents\School_Files\Spring_2020\UROP\Resources\Agreeability\Extracted\ExtractedEmily')
-Irene = find('*.txt',r'C:\Users\Blender\iCloudDrive\Documents\School_Files\Spring_2020\UROP\Resources\Agreeability\Extracted\ExtractedIrene')
 
 def get_defaults(paths):
     #tag, start, stop, duration, notes
@@ -16,11 +14,9 @@ def get_defaults(paths):
                 line[-1] = line[-1].strip("\n")
                 if line[0] == 'default':
                     duration = line[3]
-                    subjectNumber = (path[126:129])
-                    sessionNumber =(path[130:133])
-                    annotator = (path[134:])
-                    annotator = annotator.split('.')
-                    annotator = annotator[0]
+                    subjectNumber = (path[44:47])
+                    sessionNumber =(path[48:51])
+                    annotator = (path[38:43])
                     text = line[4]
                     time = line[1]
 
@@ -29,12 +25,30 @@ def get_defaults(paths):
     return output
                 
 
+def import_paths_from_txt(txt):  ## **DONE**
+    """
+    borrowed from data counter, imports lines as elements of a list.
+
+    allows us to store paths in persistent .txt file, and just pull from that
+
+    arguments:
+        txt (str): path to text file with paths
+
+    returns:
+        out (list): list where elements are paths
+    """
+
+    out = pd.read_csv(txt, header=None).values.flatten().tolist()
+    return out
+
 def writeToCSV(inp):
     with open("output.csv",'w',newline="") as f:
         writer = csv.writer(f)
         writer.writerows(inp)
 
 if __name__ == "__main__":
-    Emily.extend(Irene)
-    L = get_defaults(Emily)
+    paths = import_paths_from_txt('pathsTotal.txt')
+    L = get_defaults(paths)
     writeToCSV(L)
+    # path = "/home/sami/Work/resources/inter-rater/Emily/P01/S02/P01_S02_wellness_Emily.txt"
+    # print(path[48:51])
